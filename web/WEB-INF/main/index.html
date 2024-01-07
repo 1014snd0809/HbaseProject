@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+                data:{"data1":"11","data2":"22"},
+                url:"/hello/scanStudent",
+                type:"post",
+                success:function(data){
+                    var list=data.infos;
+                    var tr="";
+                    $.each(list, function(i, item){
+                        tr +="<tr><td>"+item.rowname+"</td>"+"<td>"+item.base_info.no+"</td>"
+                            +"<td>"+item.base_info.name+"</td>"+"<td>"+item.base_info.cls+"</td>"
+                            +"<td><a href='/hello/delete?rowname="+item.rowname+"'>删除</a>|<a href='/hello/openupdate?rowname="+item.rowname+"'>修改</a></td>";
+                    });
+                    $("table").append(tr);
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body  align="center">
+这是学生信息页面<br>
+
+<a href="/hello/add">添加</a>|<a href="/hello">刷新</a>|
+<hr>
+
+<table border="1" align="center">
+    <thead>
+    <tr>
+        <td>行号</td>
+        <td>学号</td>
+        <td>姓名</td>
+        <td>班级</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+</html>
